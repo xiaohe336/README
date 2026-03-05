@@ -1,4 +1,4 @@
-# QGroundControl (QGC) 地面站安装与配置
+# QGroundControl (QGC) 地面站安装
 
 * 将当前用户添加到 dialout 组以获取串口权限：`sudo usermod -a -G dialout $USER`
 * 移除可能占用飞控串口的 modemmanager 服务：`sudo apt-get remove modemmanager -y`
