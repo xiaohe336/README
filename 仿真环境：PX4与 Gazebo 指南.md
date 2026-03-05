@@ -3,3 +3,4 @@
 * 打开终端。
 * 进入 PX4 目录：`cd ~/PX4-Autopilot`
 * 启动 X500 Gazebo Garden 仿真：`make px4_sitl gz_x500`
+* 相应仿真代码存放在`SSH_fly\仿真测试`中
