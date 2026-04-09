@@ -1,0 +1,5 @@
+ros2 run usb_cam usb_cam_node_exe
+
+ros2 run camera_calibration cameracalibrator --size 11x8 --square 0.02 --ros-args -r image:=/image_raw -p camera:=/usb_cam
+
+存放路径：/home/admin1/catkin_ws/src/apriltag_detection
