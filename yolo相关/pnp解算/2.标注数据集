@@ -1,1 +1,40 @@
 
+没问题，既然只需要最直接的操作指南，我为你精简了一份可以直接复制保存为 `README.md` 的简明文档：
+
+***
+
+# 自动 ArUco 关键点标注器使用说明
+
+本脚本用于在 Jetson 开发板上，通过摄像头自动识别 ArUco 标记并生成关键点标注数据集。
+
+## 1. 运行环境与路径
+- **硬件平台**：Jetson 系列开发板
+- **工作路径**：`/home/admin1/catkin_ws/src/apriltag_detection`
+
+## 2. 快速启动
+请在 Jetson 的终端中依次执行以下命令：
+
+```bash
+# 1. 切换到项目目录
+cd /home/admin1/catkin_ws/src/apriltag_detection
+
+# 2. 运行标注程序
+python3 aruco_cam6.py
+```
+
+*注：按 `Ctrl+C` 可以随时停止程序。*
+
+## 3. 高级用法（可选参数）
+如果需要修改默认设置（默认使用 0 号摄像头，每 1 秒保存一次），可以在命令后追加参数：
+
+```bash
+# 格式: python3 aruco_cam6.py [摄像头ID] [输出目录名] [保存间隔/秒]
+python3 aruco_cam6.py 0 dataset_auto 1.0
+```
+
+## 4. 数据输出
+程序成功运行并在画面中识别到 ArUco 码（ID:1）后，会自动在当前目录下生成数据：
+- **图片目录**：`dataset_auto/images/` （保存采集的 `.jpg` 画面）
+- **标注目录**：`dataset_auto/labels/` （保存 Labelme 格式的 `.json` 关键点坐标）
+
+*** 你可以直接把这段内容复制发给下个使用者，或者保存为 `README.md` 放在那个路径下，他们一看就能跑起来了。
