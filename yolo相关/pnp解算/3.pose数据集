@@ -1,0 +1,72 @@
+# YOLO-Pose 数据集处理自动化流水线
+
+本文档说明了如何将自动标注脚本生成的原始数据，经过**分割**和**格式转化**，最终生成可用于 YOLO-Pose 训练的标准数据集。
+
+> **💡 核心逻辑说明**：
+> 为了保证代码无需任何修改即可直接运行，本流水线严格遵循：**先运行分割脚本（构建 Train/Val 目录结构），再运行转化脚本（进入对应目录生成 TXT 标签）**的顺序。
+
+## 0. 工作空间与前期准备
+
+- **工作路径**：`/home/user/PycharmProjects/yolo`
+
+在开始之前，请确保你的原始数据存放在 `button` 文件夹中（名称需与代码内一致），并且结构如下：
+
+```text
+/home/user/PycharmProjects/yolo/
+├── button/
+│   ├── images/             # 存放所有摄像头拍下的图片 (.jpg)
+│   └── labels/             # 存放所有的原始标注文件 (.json)
+├── 分割.py                  # 数据集分割脚本
+└── 转化.py                  # Labelme 转 YOLO 脚本
+```
+
+---
+
+## 第一步：划分数据集 (Train/Val Split)
+
+此步骤将原始的大量混合数据，按 `8:2` 的比例洗牌，并构建出后续转化脚本所需要的目录树。
+
+**1. 执行命令：**
+```bash
+cd /home/user/PycharmProjects/yolo
+python3 分割.py
+```
+
+**2. 预期结果：**
+脚本运行完毕后，会在当前目录下生成 `button_Dataset` 文件夹，内部已经按比例分好了训练集和验证集：
+```text
+button_Dataset/
+├── images/             
+│   ├── train/          # 80% 的图片
+│   └── val/            # 20% 的图片
+└── labelme_jsons/      
+    ├── train/          # 对应的 80% JSON标注
+    └── val/            # 对应的 20% JSON标注
+```
+
+---
+
+## 第二步：自动算框与 YOLO 格式转化
+
+此步骤会自动读取 JSON 中的关键点数据，向外扩展 15% 自动生成目标边界框（BBox），并转换为 YOLO 所需的 `.txt` 格式。
+
+**1. 执行命令：**
+```bash
+cd /home/user/PycharmProjects/yolo
+python3 转化.py
+```
+
+**2. 预期结果：**
+脚本会自动读取刚刚分好的 `button_Dataset` 目录，生成最终的 `labels` 文件夹和训练配置文件：
+
+```text
+button_Dataset/
+├── images/             
+├── labels/             # [新增] YOLO 格式标签
+│   ├── train/          # 包含转换后的 .txt 文件
+│   └── val/            
+└── data.yaml           # [新增] YOLO 训练配置文件
+```
+*(注：生成的 `.txt` 文件每一行均符合 YOLO-Pose 格式：`类别 x中心 y中心 宽度 高度 点1_x 点1_y 状态1 ...`，所有坐标均已自动归一化。)*
+
+---
