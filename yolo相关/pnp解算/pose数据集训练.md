@@ -2,13 +2,6 @@
 
 本文档介绍了如何使用准备好的数据集（`button13_Dataset`），通过执行 `train_pose.py` 脚本来训练 YOLO 关键点检测（Pose）模型。
 
-## 1. 环境准备
-
-在开始训练之前，请确保你已经安装了 Ultralytics 官方库（YOLOv8/YOLO11 的运行环境）：
-```bash
-pip install ultralytics
-```
-
 ## 2. 脚本概览 (`train_pose.py`)
 
 该脚本是模型训练的启动入口。它会自动读取之前数据流水线生成的 `data.yaml` 配置文件，并加载预训练权重开始迁移学习。
@@ -17,7 +10,7 @@ pip install ultralytics
 
 | 参数 | 设定值 | 说明 |
 | :--- | :--- | :--- |
-| `model` | `yolo26n-pose.pt` | 使用的预训练模型权重（请确保本地存在该文件或输入正确的官方版本名称如 `yolo11n-pose.pt`）。 |
+| `model` | `yolo26n-pose.pt` | 使用的预训练模型权重|
 | `data` | `/.../data.yaml` | 数据集配置文件的绝对路径。 |
 | `epochs` | `300` | 总训练轮次。模型将遍历整个数据集 300 次。 |
 | `batch` | `8` | 批次大小。设置为 8 适合显存有限的设备（如 Jetson 或普通笔记本）。 |
@@ -33,8 +26,6 @@ pip install ultralytics
 cd /home/user/PycharmProjects/yolo
 python3 train_pose.py
 ```
-
-*💡 提示：训练 300 个 epoch 可能需要较长时间。在此期间，你可以随时按 `Ctrl+C` 中断训练，YOLO 会自动保存当前的进度，支持断点续传（通过传递 `resume=True` 参数）。*
 
 ## 4. 预期产出与结果查看
 
