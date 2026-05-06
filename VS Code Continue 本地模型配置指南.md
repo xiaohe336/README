@@ -7,7 +7,7 @@
 ## 步骤一：打开配置文件
 
 1. 在 VS Code 中打开 Continue 插件侧边栏。
-2. 点击右下角的 **齿轮图标 (⚙️)**，或者通过命令面板（`Ctrl+Shift+P` / `Cmd+Shift+P`）搜索并选择 `Continue: Open config.yaml`。
+2. 点击**齿轮图标 (⚙️)**，或者通过命令面板（`Ctrl+Shift+P` / `Cmd+Shift+P`）搜索并选择 `Continue: Open config.yaml`。
 
 ---
 
