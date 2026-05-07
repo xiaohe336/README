@@ -1,6 +1,3 @@
-以下是为您整理的完整 Markdown 格式说明文档，专注于 `aruco_detector.py` 的定位与检测功能：
-
-```markdown
 # ArUco 码基础检测与位姿估计指引 (`aruco_detector.py`)
 
 `aruco_detector.py` 是本项目中最核心的底层检测工具。它能够直接识别画面中的 ArUco 码，标注其边框、中心点和 ID，并利用相机内参计算其相对于相机的 **3D 位姿**（XYZ 平移与旋转角度）。
@@ -70,4 +67,3 @@ python3 aruco_detector.py -c -m 0.05 -a DICT_4X4_50
 * **畸变系数**: 已包含针对径向和切向畸变的补偿参数。
 
 > **提示**: 如果在 Jetson 上运行时定位精度偏差较大，请确认当前摄像头分辨率是否为 640x480，或根据实际标定结果更新脚本中的 `matrix_coefficients` 矩阵。
-```
